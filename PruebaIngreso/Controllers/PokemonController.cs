@@ -15,13 +15,13 @@ namespace PruebaIngreso.Controllers
     {
 
         [HttpGet("{name}")]
-        public  IActionResult getPokemon(string name) {
+        public async Task<IActionResult> getPokemon(string name) {
 
             string url = "https://pokeapi.co/api/v2/pokemon/" + name;
 
             using (WebClient json = new WebClient())
             {
-                var datos =  json.DownloadString(url);
+                var datos = await json.DownloadStringTaskAsync(url);
                 return Ok(datos);
             }
         }
